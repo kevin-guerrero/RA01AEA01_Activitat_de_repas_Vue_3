@@ -42,15 +42,19 @@ const songsListened = computed(() => {
     }
 });
 
+const changeStatus = () => {
+    //TODO: Logica per canviar l'estat de la cançó
+}
+
 </script>
 
 <template>
-  <h1>Gestor de canços</h1>
-  <input v-model="newSong" placeholder="Escriu una nova canço">
+  <h1>Gestor de cançons</h1>
+  <input v-model="newSong" placeholder="Escriu una nova cançó">
   <button @click="createSong">Afegir</button>  
 
   <label>
-    Mostrar canços escoltades
+    Mostrar cançons escoltades
     <input type="checkbox" v-model="isListened">
   </label>
 
@@ -60,8 +64,8 @@ const songsListened = computed(() => {
      :key="song.id"
     >
      {{ song.nom }} -
-     <span v-if="song.escoltada === true">Escoltada</span>
-     <span v-else="song.escoltada === false">No Escoltada</span>
+     <button v-if="song.escoltada === true", @click="changeStatus">Escoltada</button>
+     <button v-else="song.escoltada === false", @click="changeStatus">No Escoltada</button>
     </li>
 
   </ul>
