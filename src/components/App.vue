@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 // Info
 const songs = ref([
@@ -11,12 +11,15 @@ const songs = ref([
     {
         id: 2,
         nom: "Cinnamon girl",
-        escoltada: false
+        escoltada: true
     }
 ]);
 
 // Variable per el input de l'usuari
 const newSong = ref('');
+
+// Variable per les cançons escoltadas
+const isListened = ref(false);
 
 // Funcion per afegir una nova cançó
 const createSong = () =>{
@@ -25,7 +28,19 @@ const createSong = () =>{
         nom: newSong.value, // Nom escollit per l'usuari
         escoltada: false // Per defecte la posem en false
     });
+
+    // Limpiar input
+    newSong.value = ''
 };
+
+// Funció per mostrar canços escoltadas
+const songsListened = computed(() => {
+    if(isListened.value === true) {
+        return songs.value.filter(song => song.escoltada)
+    }else {
+        return songs.value
+    }
+});
 
 </script>
 
@@ -34,13 +49,21 @@ const createSong = () =>{
   <input v-model="newSong" placeholder="Escriu una nova canço">
   <button @click="createSong">Afegir</button>  
 
+  <label>
+    Mostrar canços escoltades
+    <input type="checkbox" v-model="isListened">
+  </label>
+
   <ul>
     <li 
-     v-for="song in songs" 
+     v-for="song in songsListened" 
      :key="song.id"
     >
-     {{ song.nom }} - {{ song.escoltada }}
+     {{ song.nom }} -
+     <span v-if="song.escoltada === true">Escoltada</span>
+     <span v-else="song.escoltada === false">No Escoltada</span>
     </li>
+
   </ul>
 </template>
 
