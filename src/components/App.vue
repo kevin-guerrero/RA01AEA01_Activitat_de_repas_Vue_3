@@ -47,11 +47,7 @@ const changeStatus = (songSelected) => {
     const songSearch = songs.value.find(song => song.id === songSelected);
 
     // Canviar valor (boolean) de la propietat (escoltada) del objecte (cançó)
-    if(songSearch.escoltada === false) {
-        songSearch.escoltada = true
-    }else {
-        songSearch.escoltada = false
-    }
+    songSearch.escoltada = !songSearch.escoltada;
 }
 
 </script>
