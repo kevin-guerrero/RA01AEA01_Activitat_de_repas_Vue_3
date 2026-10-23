@@ -42,8 +42,16 @@ const songsListened = computed(() => {
     }
 });
 
-const changeStatus = () => {
-    //TODO: Logica per canviar l'estat de la cançó
+const changeStatus = (songSelected) => {
+    //Buscar canço seleccionada
+    const songSearch = songs.value.find(song => song.id === songSelected);
+
+    // Canviar valor (boolean) de la propietat (escoltada) del objecte (cançó)
+    if(songSearch.escoltada === false) {
+        songSearch.escoltada = true
+    }else {
+        songSearch.escoltada = false
+    }
 }
 
 </script>
@@ -64,8 +72,8 @@ const changeStatus = () => {
      :key="song.id"
     >
      {{ song.nom }} -
-     <button v-if="song.escoltada === true", @click="changeStatus">Escoltada</button>
-     <button v-else="song.escoltada === false", @click="changeStatus">No Escoltada</button>
+     <button v-if="song.escoltada === true", @click="changeStatus(song.id)">Escoltada</button>
+     <button v-else="song.escoltada === false", @click="changeStatus(song.id)">No Escoltada</button>
     </li>
 
   </ul>
