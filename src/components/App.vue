@@ -12,6 +12,16 @@ const songs = ref([
         id: 2,
         nom: "Cinnamon girl",
         escoltada: true
+    },
+    {
+        id: 3,
+        nom: "Chasing Cars",
+        escoltada: false
+    },
+    {
+        id: 4,
+        nom: "Hey Jude",
+        escoltada: true
     }
 ]);
 
