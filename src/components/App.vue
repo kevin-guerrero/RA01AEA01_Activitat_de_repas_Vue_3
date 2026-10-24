@@ -50,6 +50,12 @@ const changeStatus = (songSelected) => {
     songSearch.escoltada = !songSearch.escoltada;
 }
 
+const deleteSong = (songSelected) => {
+    const songsUpdated = songs.value.filter(song => song.id !== songSelected)
+
+    songs.value = songsUpdated
+}
+
 </script>
 
 <template>
@@ -70,6 +76,7 @@ const changeStatus = (songSelected) => {
      {{ song.nom }} -
      <button v-if="song.escoltada === true", @click="changeStatus(song.id)">Escoltada</button>
      <button v-else="song.escoltada === false", @click="changeStatus(song.id)">No Escoltada</button>
+     <button @click="deleteSong(song.id)">🗑️</button>
     </li>
 
   </ul>
