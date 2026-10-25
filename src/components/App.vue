@@ -33,13 +33,20 @@ const isListened = ref(false);
 
 // Funcion per afegir una nova cançó
 const createSong = () =>{
+
+    // Si l'usuari insereix una cadena de text buida es descarta
+    if(newSong.value.trim() === '') {
+        newSong.value = '' // Netejar input
+        return 
+    }
+
     songs.value.push({
         id: Date.now(), // Temps actual en millisegons
         nom: newSong.value, // Nom escollit per l'usuari
         escoltada: false // Per defecte la posem en false
     });
 
-    // Limpiar input
+    // Netejar input
     newSong.value = ''
 };
 
