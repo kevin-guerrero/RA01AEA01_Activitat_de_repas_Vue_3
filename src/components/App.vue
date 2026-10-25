@@ -28,7 +28,7 @@ const songs = ref([
 // Variable per el input de l'usuari
 const newSong = ref('');
 
-// Variable per les cançons escoltadas
+// Variable per les cançons que falten per escoltar
 const isListened = ref(false);
 
 // Funcion per afegir una nova cançó
@@ -43,12 +43,12 @@ const createSong = () =>{
     newSong.value = ''
 };
 
-// Funció per mostrar canços escoltadas
+// Funció per mostrar canços que falten per escoltar
 const songsListened = computed(() => {
-    if(isListened.value === true) {
-        return songs.value.filter(song => song.escoltada)
-    }else {
+    if(isListened.value === false) {
         return songs.value
+    }else {
+        return songs.value.filter(song => song.escoltada === false)
     }
 });
 
@@ -74,7 +74,7 @@ const deleteSong = (songSelected) => {
   <button @click="createSong">Afegir</button>  
 
   <label>
-    Mostrar cançons escoltades
+    Mostrar cançons pendents
     <input type="checkbox" v-model="isListened">
   </label>
 
@@ -84,8 +84,8 @@ const deleteSong = (songSelected) => {
      :key="song.id"
     >
      {{ song.nom }} -
-     <button v-if="song.escoltada === true", @click="changeStatus(song.id)">Escoltada</button>
-     <button v-else="song.escoltada === false", @click="changeStatus(song.id)">No Escoltada</button>
+     <button v-if="song.escoltada" @click="changeStatus(song.id)">Escoltada</button>
+     <button v-else @click="changeStatus(song.id)">No Escoltada</button>
      <button @click="deleteSong(song.id)">🗑️</button>
     </li>
 
