@@ -66,6 +66,28 @@ const deleteSong = (songSelected) => {
     songs.value = songsUpdated
 }
 
+const totalSongs = computed(() => {
+    var allSongs = 0;
+
+    for(const song of songs.value) {
+        allSongs++
+    };
+
+    return allSongs;
+});
+
+const pendingSongs = computed (() => {
+    var songPending = 0;
+
+    for(const song of songs.value) {
+        if(song.escoltada === false) {
+            songPending++
+        }
+    };
+
+    return songPending;
+});
+
 </script>
 
 <template>
@@ -88,8 +110,9 @@ const deleteSong = (songSelected) => {
      <button v-else @click="changeStatus(song.id)">No Escoltada</button>
      <button @click="deleteSong(song.id)">🗑️</button>
     </li>
-
   </ul>
+
+  <p >Total: {{ totalSongs }} | Pendents: {{ pendingSongs }} </p>
 </template>
 
 <style scoped></style>
